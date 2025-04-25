@@ -1,0 +1,113 @@
+/* src/components/Login.css */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #c0d4f3; /* Optional: background color for the page */
+}
+
+.login-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff; /* White background for the login box */
+  border-radius: 15px; /* Rounded corners for the box */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+  width: 90%;
+  max-width: 700px; /* Max width to avoid stretching */
+  padding: 60px;
+  height: 400px;
+  /* Adjustments for mobile screens */
+  flex-wrap: wrap;  /* Allow logo and form to wrap in small screens */
+}
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.login-form-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h5 {
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login-container img {
+  width: 170px;
+  height: 170px;
+  object-fit: contain; /* Maintains the aspect ratio of the logo */
+}
+
+.login-form-container form {
+  width: 100%;
+}
+
+.login-button {
+  margin-top: 20px;
+}
+
+.login-paper {
+  padding: 0; /* Remove internal padding for a unified look */
+  width: 100%;
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+  .login-box {
+    flex-direction: column; /* Stack the logo and form vertically */
+    height: auto; /* Remove fixed height for better flexibility */
+    padding: 40px 20px; /* Adjust padding */
+  }
+
+  .logo-container {
+    margin-right: 0; /* Remove right margin on smaller screens */
+    margin-bottom: 20px; /* Add some space below the logo */
+  }
+
+  .login-form-container {
+    flex: 1;
+    text-align: center; /* Center form content */
+  }
+
+  h5 {
+    font-size: 1.25rem; /* Adjust font size for smaller screens */
+  }
+
+  .login-container img {
+    width: 120px; /* Adjust logo size for mobile */
+    height: 120px;
+  }
+
+  .login-button {
+    width: 100%; /* Make the login button full-width */
+  }
+}
+
+/* Extra Small Mobile View (portrait or small screens) */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 30px 15px; /* Reduced padding */
+  }
+
+  .login-container img {
+    width: 100px; /* Further reduce logo size for very small screens */
+    height: 100px;
+  }
+
+  .login-button {
+    font-size: 1.1rem; /* Slightly larger text for the button */
+  }
+}
