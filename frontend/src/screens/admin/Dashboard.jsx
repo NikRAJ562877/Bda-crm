@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, CssBaseline, AppBar, Toolbar, Typography, Drawer, IconButton, List, ListSubheader, ListItemButton, ListItemIcon, ListItemText, Divider, Collapse, Grid, useMediaQuery, styled } from '@mui/material';
-import { Menu as MenuIcon, Dashboard as DashboardIcon, PersonAdd as PersonAddIcon, BarChart as BarChartIcon, Description as DescriptionIcon, Layers as LayersIcon, ExpandLess, ExpandMore, Logout as LogoutIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, Dashboard as DashboardIcon, PersonAdd as PersonAddIcon, BarChart as BarChartIcon, Description as DescriptionIcon, ExpandLess, ExpandMore, Logout as LogoutIcon } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import apiClient from '../../api/auth'; // Adjust path to where your apiClient is located
 
@@ -67,7 +67,7 @@ export default function AdminDashboard() {
     { divider: true },
     { text: 'Sales', icon: <BarChartIcon />, onClick: () => navigate('/admin/reports/sales') },
     { text: 'Traffic', icon: <DescriptionIcon />, onClick: () => navigate('/admin/reports/traffic') },
-    { text: 'Integrations', icon: <LayersIcon />, onClick: () => navigate('/admin/integrations') },
+    { text: 'Executive Reports', icon: <BarChartIcon />, onClick: () => navigate('/admin/ex-report') },
   ];
 
   const drawerContent = (
@@ -99,9 +99,9 @@ export default function AdminDashboard() {
               ))}
             </List>
           </Collapse>
-          <ListItemButton onClick={navItems[5].onClick}>
-            <ListItemIcon><LayersIcon /></ListItemIcon>
-            <ListItemText primary="Integrations" />
+          <ListItemButton onClick={() => navigate('/admin/ex-report')}>
+            <ListItemIcon><BarChartIcon /></ListItemIcon>
+            <ListItemText primary="Executive Reports" />
           </ListItemButton>
         </List>
       </Box>

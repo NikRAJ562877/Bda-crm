@@ -11,11 +11,11 @@ import {
   AppBar,
   Toolbar,
 } from '@mui/material';
-import { Person, Email, Lock, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Person, Email, Lock, Visibility, VisibilityOff, BadgeOutlined } from '@mui/icons-material';
 import apiClient from '../../api/auth'; // Adjust the path based on your folder structure
 
 function CreateExecutive() {
-  const [form, setForm] = useState({ username: '', email: '', password: '', role: '' });
+  const [form, setForm] = useState({ username: '', EmpID: '', email: '', password: '', role: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -35,7 +35,7 @@ function CreateExecutive() {
         token: token,
       });
       setMessage('Executive created successfully!');
-      setForm({ username: '', email: '', password: '', role: '' });
+      setForm({ username: '',EmpID: '', email: '', password: '', role: '' });
     } catch (err) {
       setMessage(err?.response?.data?.error || 'Something went wrong');
     }
@@ -118,6 +118,26 @@ function CreateExecutive() {
                   }}
                 />
               </Box>
+
+              <Box mb={2}>
+                <TextField
+                  label="EmpID"
+                  name="EmpID"
+                  type="EmpId"
+                  fullWidth
+                  value={form.EmpID}
+                  onChange={handleChange}
+                  required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BadgeOutlined />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Box>
+
               <Box mb={2}>
                 <TextField
                   label="Email"

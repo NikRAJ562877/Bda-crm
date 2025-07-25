@@ -48,14 +48,15 @@ function Login() {
         method: "POST",
         body: form,
       });
-  
+      
       if (res && res.token && res.role) {
-        const { token, role, name } = res;
+        const { token, role, name, empID } = res;
   
         // Save the token and role to sessionStorage
         sessionStorage.setItem("token", token);
         sessionStorage.setItem("role", role);
         sessionStorage.setItem("name", name);
+        sessionStorage.setItem("empID", empID);
       
         // Redirect based on role
         switch (role) {

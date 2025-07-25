@@ -34,7 +34,8 @@ router.post('/login', async (req, res) => {
     res.json({
       token,
       role: user.role,
-      name: user.username  // This will be saved in sessionStorage on frontend
+      name: user.username,
+      empID: user.EmpID,  // This will be saved in sessionStorage on frontend
     });
   } catch (err) {
     console.error('Login error:', err);
@@ -64,14 +65,14 @@ router.get('/dashboard', async (req, res) => {
   }
 });
  
-// Route for creating an executive
+ // Route for creating an executive
 router.post('/create-executive', authenticateAdmin, async (req, res) => {
-  const { username, email, password, role } = req.body;
+  const { username, EmpID, email, password, role } = req.body;  // <-- added EmpID
   console.log('Received data:', req.body);  // Debug log
 
   try {
     // Validate all fields
-    if (!username || !email || !password || !role) {
+    if (!username || !EmpID || !email || !password || !role) {  // <-- Validate EmpID also
       return res.status(400).json({ error: 'All fields are required' });
     }
 
@@ -81,6 +82,12 @@ router.post('/create-executive', authenticateAdmin, async (req, res) => {
       return res.status(400).json({ error: 'Username already exists' });
     }
 
+    // Check for existing EmpID
+    const existingEmpID = await User.findOne({ EmpID });  // <-- Check if EmpID is already used
+    if (existingEmpID) {
+      return res.status(400).json({ error: 'EmpID already in use' });
+    }
+
     // Check for existing email
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {
@@ -88,7 +95,7 @@ router.post('/create-executive', authenticateAdmin, async (req, res) => {
     }
 
     // Create and save new user
-    const newUser = new User({ username, email, password, role });
+    const newUser = new User({ username, EmpID, email, password, role }); // <-- Include EmpID
     await newUser.save();
 
     res.status(201).json({ message: 'Executive created successfully' });
@@ -97,6 +104,7 @@ router.post('/create-executive', authenticateAdmin, async (req, res) => {
     res.status(500).json({ error: 'Error creating executive: ' + error.message });
   }
 });
+
 
 
 module.exports = router;

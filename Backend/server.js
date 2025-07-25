@@ -15,6 +15,8 @@ app.use(cors({
 }));
 
 // Routes
+console.log("✅ Mounting /api/admin routes...");
+
 app.use('/api/admin', adminRoutes);
 
 // Connect to MongoDB
@@ -29,7 +31,11 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 // Start the server
-const PORT = process.env.port || 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+});
+
+app.get('/test-root', (req, res) => {
+  res.json({ message: 'Root route works' });
 });

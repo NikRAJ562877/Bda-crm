@@ -15,21 +15,22 @@ const API_BASE_URL = 'http://localhost:5000/api'; // Update if needed
  */
 const apiClient = async ({ endpoint, method = 'GET', body = null, token = null }) => {
   try {
-    // Ensure the content type is set correctly based on the type of body
+    const isFormData = body instanceof FormData;
+
     const headers = {
-      'Content-Type': body instanceof FormData ? 'multipart/form-data' : 'application/json',
-      ...(token && { Authorization: `Bearer ${token}` }), // Add authorization header if token exists
+      ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
+      ...(token && { Authorization: `Bearer ${token}` }), // Add Authorization if token exists
     };
 
     const config = {
       method,
       url: `${API_BASE_URL}${endpoint}`,
-      headers,
-      ...(body && { data: body instanceof FormData ? body : JSON.stringify(body) }), // Ensure correct data type
+      headers: { 'Content-Type': 'application/json', ...(token && { Authorization: `Bearer ${token}` }) },
+      data: body, // ✅ send body directly (no stringify!)
     };
 
     const response = await axios(config);
-    console.log('API Response:', response.data); // Add this line to log the response data
+    console.log('API Response:', response.data); // For debugging
     return response.data;
   } catch (error) {
     console.error('API Error:', error.response?.data || error.message);
